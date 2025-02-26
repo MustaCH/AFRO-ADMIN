@@ -7,8 +7,9 @@ export const UserCreate = () => (
       <TextInput source="name" />
       <TextInput source="username" />
       <TextInput source="email" />
-      <TextInput source="address.street" />
-      <TextInput source="phone" />
+      <TextInput source="password" />
+      <TextInput source="subscription" />
+      <TextInput source="role" />
     </SimpleForm>
   </Create>
 );

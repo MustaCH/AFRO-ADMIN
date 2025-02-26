@@ -17,9 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="text-white">
-          <h1>AFRODITA Admin Panel</h1>
-        </div>
         {children}
       </body>
     </html>
