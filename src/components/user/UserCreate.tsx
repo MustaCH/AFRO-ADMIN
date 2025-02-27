@@ -1,15 +1,37 @@
-import { Create, SimpleForm, TextInput } from "react-admin";
+import {
+  Create,
+  SelectField,
+  SelectInput,
+  SimpleForm,
+  TextInput,
+} from "react-admin";
 
 export const UserCreate = () => (
-  <Create>
+  <Create redirect="list">
     <SimpleForm>
-      <TextInput source="id" />
       <TextInput source="name" />
+      <TextInput source="lastname" />
       <TextInput source="username" />
       <TextInput source="email" />
       <TextInput source="password" />
-      <TextInput source="subscription" />
-      <TextInput source="role" />
+      <SelectInput
+        source="subscription"
+        defaultValue="NONE"
+        choices={[
+          { id: "NONE", name: "NONE" },
+          { id: "BASIC", name: "BASIC" },
+          { id: "SILVER", name: "SILVER" },
+          { id: "GOLD", name: "GOLD" },
+        ]}
+      />
+      <SelectInput
+        source="role"
+        defaultValue="USER"
+        choices={[
+          { id: "USER", name: "USER" },
+          { id: "ADMIN", name: "ADMIN" },
+        ]}
+      />
     </SimpleForm>
   </Create>
 );

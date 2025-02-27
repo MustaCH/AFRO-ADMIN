@@ -1,15 +1,16 @@
 import { Edit, SimpleForm, TextInput } from "react-admin";
 
 export const UserEdit = () => (
-  <Edit>
+  <Edit redirect="list">
     <SimpleForm>
-      <TextInput source="id" />
+      <TextInput disabled source="id" />
       <TextInput source="name" />
+      <TextInput source="lastname" />
       <TextInput source="username" />
       <TextInput source="email" />
-      <TextInput source="address.street" />
-      <TextInput source="phone" />
+      <TextInput source="password" />
       <TextInput source="subscription" />
+      <TextInput source="role" />
     </SimpleForm>
   </Edit>
 );

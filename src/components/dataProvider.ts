@@ -1,4 +1,3 @@
-// dataProvider.ts
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
@@ -6,7 +5,6 @@ const apiUrl = "http://localhost:3001/api/test";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
-  // Obtener una lista de recursos
   getList: async (resource: string, params: any) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
@@ -78,14 +76,16 @@ const dataProvider = {
       method: "PUT",
       body: JSON.stringify(params.data),
     });
-    return { data: json.data };
+    return { data: { id: params.id, ...json } };
   },
 
   // Actualizar varios recursos
   updateMany: async (resource: string, params: any) => {
     const { json } = await httpClient(`${apiUrl}/${resource}/bulk`, {
       method: "PUT",
-      body: JSON.stringify(params.ids.map((id: string) => ({ id, ...params.data }))),
+      body: JSON.stringify(
+        params.ids.map((id: string) => ({ id, ...params.data }))
+      ),
     });
     return { data: json.data };
   },
@@ -100,11 +100,17 @@ const dataProvider = {
 
   // Eliminar varios recursos
   deleteMany: async (resource: string, params: any) => {
-    const { json } = await httpClient(`${apiUrl}/${resource}/bulk`, {
+    const url = `${apiUrl}/${resource}/bulk`;
+
+    const options = {
       method: "DELETE",
-      body: JSON.stringify(params.ids),
-    });
-    return { data: json.data };
+      headers: new Headers({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ ids: params.ids }),
+    };
+
+    const { json } = await httpClient(url, options);
+
+    return { data: params.ids };
   },
 };
 

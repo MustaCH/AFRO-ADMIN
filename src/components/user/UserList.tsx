@@ -5,10 +5,11 @@ export const UserList = () => (
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />
+      <TextField source="lastname" />
       <TextField source="username" />
       <EmailField source="email" />
-      <TextField source="phone" />
       <TextField source="subscription" />
+      <TextField source="role" />
     </Datagrid>
   </List>
 );
