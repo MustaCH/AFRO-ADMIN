@@ -1,7 +1,7 @@
 import { Edit, SimpleForm, TextInput } from "react-admin";
 
 export const UserEdit = () => (
-  <Edit redirect="list">
+  <Edit>
     <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="name" />
