@@ -1,4 +1,4 @@
-import { Edit, SimpleForm, TextInput } from "react-admin";
+import { DateField, Edit, SimpleForm, TextInput } from "react-admin";
 
 export const VideoEdit = () => (
   <Edit>
@@ -7,7 +7,11 @@ export const VideoEdit = () => (
       <TextInput source="title" />
       <TextInput source="description" />
       <TextInput disabled source="src" />
-      <TextInput disabled source="date" />
+      <DateField
+        source="date"
+        locales="es-AR"
+        options={{ day: "2-digit", month: "2-digit", year: "numeric" }}
+      />
     </SimpleForm>
   </Edit>
 );
