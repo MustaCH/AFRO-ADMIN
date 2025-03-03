@@ -63,19 +63,42 @@ const dataProvider = {
 
   // Crear un nuevo recurso
   create: async (resource: string, params: any) => {
+    const formData = new FormData();
+
+    // Agregar los datos al formulario
+    Object.keys(params.data).forEach((key) => {
+      if (key === "file" && params.data.file.rawFile) {
+        formData.append("file", params.data.file.rawFile);
+      } else {
+        formData.append(key, params.data[key]);
+      }
+    });
+
     const { json } = await httpClient(`${apiUrl}/${resource}`, {
       method: "POST",
-      body: JSON.stringify(params.data),
+      body: formData, // Enviar como FormData
     });
+
     return { data: json.data };
   },
 
   // Actualizar un recurso existente
   update: async (resource: string, params: any) => {
+    const formData = new FormData();
+
+    Object.keys(params.data).forEach((key) => {
+      if (key === "file" && params.data.file?.rawFile) {
+        formData.append("file", params.data.file.rawFile);
+      } else {
+        formData.append(key, params.data[key]);
+      }
+    });
+
     const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "PUT",
-      body: JSON.stringify(params.data),
+      body: formData, // Usar FormData en vez de JSON.stringify()
     });
+
     return { data: { id: params.id, ...json } };
   },
 
@@ -101,16 +124,15 @@ const dataProvider = {
   // Eliminar varios recursos
   deleteMany: async (resource: string, params: any) => {
     const url = `${apiUrl}/${resource}/bulk`;
-
     const options = {
       method: "DELETE",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify({ ids: params.ids }),
     };
 
-    const { json } = await httpClient(url, options);
+    await httpClient(url, options); // No es necesario esperar un `json.data`
 
-    return { data: params.ids };
+    return { data: params.ids }; // React-Admin necesita esta respuesta
   },
 };
 

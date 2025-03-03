@@ -1,21 +1,26 @@
-import { Create, SimpleForm, TextInput } from "react-admin";
-import * as yup from "yup";
+import {
+  Create,
+  SimpleForm,
+  TextInput,
+  FileInput,
+  FileField,
+} from "react-admin";
+import { useNotify, useRedirect } from "react-admin";
 
-const userSchema = yup.object({
-  id: yup.string(),
-  title: yup.string().required().min(3, "Mínimo 3 caracteres"),
-  description: yup.string().required(),
-  src: yup.string().required(),
-  date: yup.string().email("Email inválido").required(),
-});
+export const VideoCreate = () => {
+  const notify = useNotify();
+  const redirect = useRedirect();
 
-export const VideoCreate = () => (
-  <Create redirect="list">
-    <SimpleForm>
-      <TextInput source="title" />
-      <TextInput source="description" />
-      <TextInput source="src" />
-      <TextInput source="date" />
-    </SimpleForm>
-  </Create>
-);
+  return (
+    <Create redirect="list">
+      <SimpleForm>
+        <TextInput source="title" />
+        <TextInput source="description" />
+        <FileInput source="file" accept={{ video: [".mp4", ".mov", ".avi"] }}>
+          <FileField source="src" title="title" />
+        </FileInput>
+        <TextInput source="date" />
+      </SimpleForm>
+    </Create>
+  );
+};
