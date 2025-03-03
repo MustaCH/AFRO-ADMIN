@@ -1,4 +1,5 @@
 import {
+  ArrayField,
   Datagrid,
   DeleteButton,
   DeleteWithConfirmButton,
@@ -8,15 +9,14 @@ import {
   TextField,
 } from "react-admin";
 
-export const UserList = () => (
+export const ActorList = () => (
   <List>
     <Datagrid>
-      <TextField source="id" />
       <TextField source="name" />
-      <TextField source="username" />
-      <EmailField source="email" />
-      <TextField source="subscription" />
-      <TextField source="role" />
+      <TextField source="lastname" />
+      <TextField source="nickname" />
+      <TextField source="social" />
+      <TextField source="id" />
       <EditButton />
       <DeleteWithConfirmButton
         confirmTitle="Borrar usuario"

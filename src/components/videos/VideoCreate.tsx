@@ -5,6 +5,7 @@ import {
   FileInput,
   FileField,
   DateInput,
+  ArrayInput,
 } from "react-admin";
 import { useNotify, useRedirect } from "react-admin";
 
