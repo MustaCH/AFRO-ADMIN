@@ -1,7 +1,7 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = "http://localhost:3001/api/test";
+const apiUrl = "https://afrod-mvp.vercel.app/api/test";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
@@ -63,20 +63,10 @@ const dataProvider = {
 
   // Crear un nuevo recurso
   create: async (resource: string, params: any) => {
-    const formData = new FormData();
-
-    // Agregar los datos al formulario
-    Object.keys(params.data).forEach((key) => {
-      if (key === "file" && params.data.file.rawFile) {
-        formData.append("file", params.data.file.rawFile);
-      } else {
-        formData.append(key, params.data[key]);
-      }
-    });
-
     const { json } = await httpClient(`${apiUrl}/${resource}`, {
       method: "POST",
-      body: formData, // Enviar como FormData
+      headers: new Headers({ "Content-Type": "application/json" }),
+      body: JSON.stringify(params.data),
     });
 
     return { data: json.data };

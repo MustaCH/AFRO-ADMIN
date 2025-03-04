@@ -5,14 +5,11 @@ import {
   FileInput,
   FileField,
   DateInput,
-  ArrayInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from "react-admin";
-import { useNotify, useRedirect } from "react-admin";
 
 export const VideoCreate = () => {
-  const notify = useNotify();
-  const redirect = useRedirect();
-
   return (
     <Create redirect="list">
       <SimpleForm>
@@ -26,6 +23,9 @@ export const VideoCreate = () => {
           source="date"
           defaultValue={new Date().toISOString().split("T")[0]}
         />
+        <ReferenceArrayInput source="actors" reference="actors">
+          <SelectArrayInput optionText="nickname" />
+        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );

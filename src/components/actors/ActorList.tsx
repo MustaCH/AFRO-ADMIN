@@ -1,12 +1,13 @@
 import {
   ArrayField,
   Datagrid,
-  DeleteButton,
   DeleteWithConfirmButton,
   EditButton,
   EmailField,
   List,
+  SingleFieldList,
   TextField,
+  UrlField,
 } from "react-admin";
 
 export const ActorList = () => (
@@ -15,12 +16,11 @@ export const ActorList = () => (
       <TextField source="name" />
       <TextField source="lastname" />
       <TextField source="nickname" />
-      <TextField source="social" />
       <TextField source="id" />
       <EditButton />
       <DeleteWithConfirmButton
         confirmTitle="Borrar usuario"
-        confirmContent="Seguro deseas eliminar a éste usuario?"
+        confirmContent="Seguro deseas eliminar a este usuario?"
       />
     </Datagrid>
   </List>
