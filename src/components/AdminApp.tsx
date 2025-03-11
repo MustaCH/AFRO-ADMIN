@@ -1,6 +1,6 @@
 "use client";
 
-import { Admin, EditGuesser, ListGuesser, Resource } from "react-admin";
+import { Admin, Resource } from "react-admin";
 import { UserList } from "./user/UserList";
 import { LuSquareUserRound, LuUsersRound, LuVideo } from "react-icons/lu";
 import { UserCreate } from "./user/UserCreate";
@@ -12,9 +12,10 @@ import dataProvider from "./dataProvider";
 import { ActorList } from "./actors/ActorList";
 import { ActorEdit } from "./actors/ActorEdit";
 import { ActorCreate } from "./actors/ActorCreate";
+import { DataProvider } from "react-admin";
 
 const AdminApp = () => (
-  <Admin dataProvider={dataProvider}>
+  <Admin dataProvider={dataProvider as DataProvider}>
     <Resource
       name="users"
       icon={LuUsersRound}

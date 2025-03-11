@@ -1,4 +1,4 @@
-import { Edit, SelectInput, SimpleForm, TextInput } from "react-admin";
+import { Edit, SimpleForm, TextInput } from "react-admin";
 
 export const ActorEdit = () => (
   <Edit confirm="¿Estás seguro?">
@@ -7,8 +7,6 @@ export const ActorEdit = () => (
       <TextInput source="name" />
       <TextInput source="lastname" />
       <TextInput source="nickname" />
-      <SelectInput source="social" />
     </SimpleForm>
   </Edit>
 );
-// Compare this snippet from src/components/user/UserCreate.tsx:

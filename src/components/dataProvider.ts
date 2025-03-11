@@ -64,6 +64,22 @@ const dataProvider = {
   // Crear un nuevo recurso
   create: async (resource: string, params: any) => {
     if (resource === "videos") {
+      // 🔹 Crear FormData para videos (archivo + campos)
+      const formData = new FormData();
+      formData.append("file", params.data.file.rawFile); // Campo del archivo
+      formData.append("title", params.data.title);
+      formData.append("description", params.data.description);
+      formData.append("date", params.data.date);
+      formData.append("actors", JSON.stringify(params.data.actors));
+
+      // 🔹 Enviar a la API
+      const { json } = await httpClient(`${apiUrl}/${resource}`, {
+        method: "POST",
+        body: formData,
+        // No incluir headers Content-Type, FormData lo maneja automáticamente
+      });
+
+      return { data: json.data };
     } else {
       const { json } = await httpClient(`${apiUrl}/${resource}`, {
         method: "POST",
