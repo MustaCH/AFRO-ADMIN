@@ -19,8 +19,8 @@ export const ActorList = () => (
       <TextField source="id" />
       <EditButton />
       <DeleteWithConfirmButton
-        confirmTitle="Borrar usuario"
-        confirmContent="Seguro deseas eliminar a este usuario?"
+        confirmTitle="Borrar actor"
+        confirmContent="Seguro deseas eliminar a este actor?"
       />
     </Datagrid>
   </List>

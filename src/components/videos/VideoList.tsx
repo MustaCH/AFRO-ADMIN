@@ -16,6 +16,7 @@ export const VideoList = () => (
         sx={{ width: 100, height: "auto" }}
       />
       <TextField source="title" />
+      <TextField source="category" />
       <TextField source="description" />
       <DateField
         source="date"

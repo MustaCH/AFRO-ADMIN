@@ -18,6 +18,7 @@ export const VideoCreate = () => {
         <FileInput source="file" accept={{ video: [".mp4", ".mov", ".avi"] }}>
           <FileField source="src" title="title" />
         </FileInput>
+        <TextInput source="category" />
         <DateInput
           disabled
           source="date"

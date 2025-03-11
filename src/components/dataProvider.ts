@@ -63,13 +63,15 @@ const dataProvider = {
 
   // Crear un nuevo recurso
   create: async (resource: string, params: any) => {
-    const { json } = await httpClient(`${apiUrl}/${resource}`, {
-      method: "POST",
-      headers: new Headers({ "Content-Type": "application/json" }),
-      body: JSON.stringify(params.data),
-    });
-
-    return { data: json.data };
+    if (resource === "videos") {
+    } else {
+      const { json } = await httpClient(`${apiUrl}/${resource}`, {
+        method: "POST",
+        body: JSON.stringify(params.data),
+        headers: new Headers({ "Content-Type": "application/json" }),
+      });
+      return { data: json.data };
+    }
   },
 
   // Actualizar un recurso existente
@@ -86,7 +88,7 @@ const dataProvider = {
 
     const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "PUT",
-      body: formData, // Usar FormData en vez de JSON.stringify()
+      body: formData,
     });
 
     return { data: { id: params.id, ...json } };
