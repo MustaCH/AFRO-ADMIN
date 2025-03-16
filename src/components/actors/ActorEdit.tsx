@@ -1,4 +1,10 @@
-import { Edit, SimpleForm, TextInput } from "react-admin";
+import {
+  ArrayInput,
+  Edit,
+  SimpleForm,
+  SimpleFormIterator,
+  TextInput,
+} from "react-admin";
 
 export const ActorEdit = () => (
   <Edit confirm="¿Estás seguro?">
@@ -7,6 +13,12 @@ export const ActorEdit = () => (
       <TextInput source="name" />
       <TextInput source="lastname" />
       <TextInput source="nickname" />
+      <ArrayInput source="social">
+        <SimpleFormIterator>
+          <TextInput source="platform" label="Plataforma (ej: instagram)" />
+          <TextInput source="url" label="URL" />
+        </SimpleFormIterator>
+      </ArrayInput>
     </SimpleForm>
   </Edit>
 );

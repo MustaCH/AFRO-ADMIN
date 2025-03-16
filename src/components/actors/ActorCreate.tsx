@@ -12,8 +12,6 @@ export const ActorCreate = () => (
       <TextInput source="name" />
       <TextInput source="lastname" />
       <TextInput source="nickname" />
-
-      {/* Redes sociales como un objeto */}
       <ArrayInput source="social">
         <SimpleFormIterator>
           <TextInput source="platform" label="Plataforma (ej: instagram)" />

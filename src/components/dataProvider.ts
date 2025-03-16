@@ -64,19 +64,16 @@ const dataProvider = {
   // Crear un nuevo recurso
   create: async (resource: string, params: any) => {
     if (resource === "videos") {
-      // 🔹 Crear FormData para videos (archivo + campos)
       const formData = new FormData();
-      formData.append("file", params.data.file.rawFile); // Campo del archivo
+      formData.append("file", params.data.file.rawFile);
       formData.append("title", params.data.title);
       formData.append("description", params.data.description);
       formData.append("date", params.data.date);
       formData.append("actors", JSON.stringify(params.data.actors));
 
-      // 🔹 Enviar a la API
       const { json } = await httpClient(`${apiUrl}/${resource}`, {
         method: "POST",
         body: formData,
-        // No incluir headers Content-Type, FormData lo maneja automáticamente
       });
 
       return { data: json.data };
@@ -92,22 +89,31 @@ const dataProvider = {
 
   // Actualizar un recurso existente
   update: async (resource: string, params: any) => {
-    const formData = new FormData();
-
-    Object.keys(params.data).forEach((key) => {
-      if (key === "file" && params.data.file?.rawFile) {
+    if (resource === "videos") {
+      const formData = new FormData();
+      if (params.data.file?.rawFile) {
         formData.append("file", params.data.file.rawFile);
-      } else {
-        formData.append(key, params.data[key]);
       }
-    });
+      formData.append("title", params.data.title);
+      formData.append("description", params.data.description);
+      formData.append("date", params.data.date);
+      formData.append("actors", JSON.stringify(params.data.actors));
 
-    const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
-      method: "PUT",
-      body: formData,
-    });
-
-    return { data: { id: params.id, ...json } };
+      const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: "PUT",
+        body: formData,
+      });
+      return { data: json.data };
+    } else {
+      // Enviar solo campos modificados
+      const { id, ...updateData } = params.data;
+      const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: "PUT",
+        body: JSON.stringify(updateData),
+        headers: new Headers({ "Content-Type": "application/json" }),
+      });
+      return { data: json.data };
+    }
   },
 
   // Actualizar varios recursos
