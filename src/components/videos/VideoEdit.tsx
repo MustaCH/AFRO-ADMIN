@@ -1,4 +1,4 @@
-import { DateField, Edit, SimpleForm, TextField, TextInput } from "react-admin";
+import { DateField, Edit, ReferenceArrayInput, SelectArrayInput, SimpleForm, TextField, TextInput } from "react-admin";
 
 export const VideoEdit = () => (
   <Edit>
@@ -14,6 +14,10 @@ export const VideoEdit = () => (
       <TextInput source="title" />
       <TextInput source="description" />
       <TextInput disabled source="src" />
+      <TextInput source="category" />
+      <ReferenceArrayInput source="actors" reference="actors">
+        <SelectArrayInput optionText="nickname" />
+      </ReferenceArrayInput>
     </SimpleForm>
   </Edit>
 );
