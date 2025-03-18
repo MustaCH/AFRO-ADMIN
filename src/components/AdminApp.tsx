@@ -13,9 +13,10 @@ import { ActorList } from "./actors/ActorList";
 import { ActorEdit } from "./actors/ActorEdit";
 import { ActorCreate } from "./actors/ActorCreate";
 import { DataProvider } from "react-admin";
+import authProvider from "./authProvider";
 
 const AdminApp = () => (
-  <Admin dataProvider={dataProvider as DataProvider}>
+  <Admin authProvider={authProvider} dataProvider={dataProvider as DataProvider}>
     <Resource
       name="users"
       icon={LuUsersRound}
